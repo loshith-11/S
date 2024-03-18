@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {Camera, useCameraDevice} from 'react-native-vision-camera';
+// import {Camera, useCameraDevice} from 'react-native-vision-camera';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -18,9 +18,11 @@ import {
 import {Colors, Images, Font} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import Modal from 'react-native';
+import { Camera ,useCameraDevices } from 'react-native-vision-camera';
 
 const ScanScreen = () => {
-  const device = useCameraDevice('back'); 
+  const devices = useCameraDevices('wide-angle-camera'); 
+  const device =devices.back;
   const navigation = useNavigation();
   const camera = useRef(null);
   const flatListRef = useRef();
@@ -62,15 +64,11 @@ const ScanScreen = () => {
     // },
   ];
 
-  // useEffect(() => {
-  //   checkPermission();
-  //   console.log("sfedf",device);
-  // }, []);
-  useLayoutEffect(() => {
-    
+  useEffect(() => {
     checkPermission();
-  
-}, []);
+    console.log("sfedf",device);
+  }, []);
+
 
 
   const checkPermission = async () => {
@@ -143,12 +141,12 @@ const ScanScreen = () => {
             <View
               style={{flexDirection: 'row', marginTop: responsiveHeight(2)}}>
               <Text style={styles.detailText}>MRP</Text>
-              <Text style={styles.valueText}> :{item.MRP}</Text>
+              <Text style={[styles.valueText,{fontWeight:'800'}]}>:{item.MRP}</Text>
             </View>
             <View
               style={{flexDirection: 'row', marginTop: responsiveHeight(2)}}>
               <Text style={styles.detailText}>Category</Text>
-              <Text style={styles.valueText}> :{item.Category}</Text>
+              <Text style={styles.valueText}>:{item.Category}</Text>
             </View>
 
             <View
@@ -472,6 +470,7 @@ const styles = StyleSheet.create({
     color: Colors.BLACK_COLOR,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Font.INTER_SEMI_BOLD,
-    // marginTop:responsiveHeight(2.5)
+    position:'absolute',
+    left:responsiveHeight(15)
   },
 });
