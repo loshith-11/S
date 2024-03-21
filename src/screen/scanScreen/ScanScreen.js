@@ -31,6 +31,7 @@ const ScanScreen = () => {
   const [showBasicDetailsModal, setShowBasicDetailsModal] = useState(false);
   const [hasPermission, setHasPermission] = React.useState(false);
   const [isActive, setIsActive] = useState(true);
+  const [takePhoto,setTakePhoto] = useState(null);
 
 
 
@@ -98,7 +99,9 @@ const ScanScreen = () => {
       enableShutterSound: false,
     });
     setShowModal(true);
+    setTakePhoto(photo.path)
     console.log('22222', photo);
+    console.log('TAKED PHOTO>>>>>>',takePhoto);
   };
 
   // const toggleDetails = () => {
